@@ -24,6 +24,7 @@ The system uses a **LangGraph state machine** to orchestrate a squad of agents t
 > Built as a portfolio project targeting a Lead AI/MLOps Engineer role, demonstrating deep understanding of agentic architectures, LLM orchestration, and cloud-native deployment patterns.
 
 ---
+<img src="https://github.com/MinhHieu13-cmc/Multi-Agent_Dev_Squad/images/Real-time self-correction loop in action.png" alt="Demo" width="100%">
 
 ## 🏗️ Architecture: The Self-Correction Loop
 
