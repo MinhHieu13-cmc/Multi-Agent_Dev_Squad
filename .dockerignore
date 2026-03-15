@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environment (never copy into image)
+venv/
+.venv/
+env/
+
+# Dot files
+.env
+.git/
+.gitignore
+
+# Runtime artifacts (mounted as volumes)
+checkpoints.sqlite
+checkpoints.sqlite-shm
+checkpoints.sqlite-wal
+outputs/
+logs/
+
+# Dev tools
+.vscode/
+.idea/
+*.code-workspace
+
+# Streamlit cache
+.streamlit/
+
+# Node
+node_modules/

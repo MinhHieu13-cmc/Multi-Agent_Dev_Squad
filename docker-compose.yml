@@ -1,0 +1,74 @@
+# =============================================================================
+#  Neos Autonomous Dev Squad - Docker Compose
+#
+#  Usage:
+#    docker-compose up -d --build     # Build & start all services in background
+#    docker-compose logs -f           # Tail all logs
+#    docker-compose logs -f backend   # Tail only backend
+#    docker-compose down              # Stop everything
+# =============================================================================
+
+# ── Shared build context ──────────────────────────────────────────────────────
+x-base-build: &base-build
+  build:
+    context: .
+    dockerfile: Dockerfile
+
+# ── Shared environment variables ─────────────────────────────────────────────
+x-common-env: &common-env
+  GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+  PYTHONUNBUFFERED: "1"
+
+services:
+
+  # ── Backend: FastAPI / LangGraph Orchestrator ───────────────────────────────
+  backend:
+    <<: *base-build
+    container_name: neos_backend
+    command: ["uvicorn", "worker:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    environment:
+      <<: *common-env
+    volumes:
+      # CRITICAL: Mount the host Docker socket so the QA Agent can spin up
+      # sibling sandbox containers to test generated code.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Persist the LangGraph SQLite checkpoint DB across restarts
+      - ./checkpoints.sqlite:/app/checkpoints.sqlite
+      # Persist generated code artifacts
+      - ./outputs:/app/outputs
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ── Frontend: Streamlit Mission Control ────────────────────────────────────
+  frontend:
+    <<: *base-build
+    container_name: neos_frontend
+    command:
+      - streamlit
+      - run
+      - app_ui.py
+      - "--server.port=8501"
+      - "--server.headless=true"
+      - "--browser.gatherUsageStats=false"
+      - "--server.address=0.0.0.0"
+    ports:
+      - "8501:8501"
+    environment:
+      <<: *common-env
+      # Point the Streamlit app to the backend service name, not localhost
+      BACKEND_URL: "http://backend:8000"
+    env_file:
+      - .env
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

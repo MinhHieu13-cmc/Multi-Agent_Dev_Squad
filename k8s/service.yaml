@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: multi-agent-worker-service
+spec:
+  selector:
+    app: multi-agent-worker
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer

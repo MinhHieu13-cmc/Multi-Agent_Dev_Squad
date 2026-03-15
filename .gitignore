@@ -1,0 +1,61 @@
+# =============================================================================
+#  .gitignore — Neos Autonomous Dev Squad
+# =============================================================================
+
+# ── Secrets & config (NEVER commit these) ────────────────────────────────────
+.env
+*.key
+*.pem
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── LangGraph & SQLite checkpoints ───────────────────────────────────────────
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+checkpoints.sqlite*
+
+# ── Runtime output artifacts (bind-mounted volumes, not source code) ──────────
+outputs/
+artifacts/
+logs/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+
+# ── Docker ───────────────────────────────────────────────────────────────────
+# (docker-compose.yml IS committed, but override files are not)
+docker-compose.override.yml
+
+# ── Streamlit ────────────────────────────────────────────────────────────────
+.streamlit/secrets.toml
