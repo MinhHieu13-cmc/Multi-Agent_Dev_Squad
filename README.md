@@ -21,8 +21,6 @@ This project is a **Proof of Concept** demonstrating how a team of specialized A
 
 The system uses a **LangGraph state machine** to orchestrate a squad of agents that communicate through a shared memory state. The critical innovation is the **self-correction loop**: if the generated code fails QA, the system automatically retries with real error feedback, just like a real developer would.
 
-> Built as a portfolio project targeting a Lead AI/MLOps Engineer role, demonstrating deep understanding of agentic architectures, LLM orchestration, and cloud-native deployment patterns.
-
 ---
 <img src="https://github.com/MinhHieu13-cmc/Multi-Agent_Dev_Squad/blob/main/image/Real-time%20self-correction%20loop%20in%20action.png" alt="Demo" width="100%">
 
