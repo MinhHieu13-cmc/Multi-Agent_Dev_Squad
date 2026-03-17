@@ -109,7 +109,7 @@ If the code crashes, the real stderr output is captured and fed directly back to
 ### 1. Clone
 
 ```bash
-git clone https://github.com/your-username/Multi-Agent_Dev_Squad.git
+git clone https://github.com/MinhHieu13-cmc/Multi-Agent_Dev_Squad.git
 cd Multi-Agent_Dev_Squad
 ```
 
@@ -118,7 +118,7 @@ cd Multi-Agent_Dev_Squad
 ```bash
 cp .env.example .env
 # Open .env and add your key:
-# GOOGLE_API_KEY=AIzaSy...
+# GOOGLE_API_KEY=
 ```
 
 ### 3. Launch the Stack
